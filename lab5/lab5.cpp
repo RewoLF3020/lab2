@@ -32,19 +32,17 @@ string CreateOpz(string &str)
     {
         if (str[k] >= 'a' && str[k] <= 'z' || isdigit(str[k]))
         {
-            if (str[k - 1] >= 'a' && str[k - 1] <= 'z' || isdigit(str[k - 1]))
+            if (str[k - 1] >= 'a' && str[k - 1] <= 'z' || isdigit(str[k - 1]) || str[k - 1] == ')')
                 t.PriorityOperator(outStr, '*');
-            else if (str[k - 1] == ')')
-                t.PriorityOperator(outStr, '*');
-            else    
-                outStr += str[k];
+
+            outStr += str[k];
         }
         else if (str[k] == '(')
         {
             if (str[k - 1] == ')' || str[k - 1] >= 'a' && str[k - 1] <= 'z')
                 t.PriorityOperator(outStr, '*');
-            else    
-                t.push(str[k]);
+    
+            t.push(str[k]);
         }
         else if (str[k] == ')')
             t.PopToOpenBracket(outStr);
