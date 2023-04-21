@@ -4,6 +4,13 @@
 #include <string>
 using std::string;
 
+struct info 
+{
+    int key;
+    string data;
+};
+
+
 class Tree
 {
     protected:
@@ -16,6 +23,39 @@ class Tree
                 Node(string str = "", int num = 0) : data(str), key(num),
                                                      left(nullptr), right(nullptr) {}
                 ~Node(){};
+
+
+                void Add(Node *&root, string str, int num)
+                {
+                    Node * node = new Node(str, num);
+                    if (root == nullptr)
+                    {
+                        root = node;
+                        return;
+                    }
+                    Node *prev, *t;
+                    t = root;
+                    while (t)
+                    {
+                        prev = t;
+                        if (num == t->key)
+                        {
+                            std::cout << "There is an element with such key!\n";
+                            return;
+                        }
+                        if (num < t->key)
+                            t = t->left;
+                        else
+                            t = t->right;
+                    }
+                    t = node;
+                    if (num < prev->key)
+                        prev->left = t;
+                    else
+                        prev->right = t;
+                }
+
+
                 void Delete(Node * t)
                 {
                     if (t)
@@ -25,6 +65,8 @@ class Tree
                         delete t;
                     }
                 }
+
+
                 void ViewInOrder(Node *t)
                 {
                     if (t)
@@ -52,6 +94,8 @@ class Tree
                         std::cout << t->key << ": " << t->data << std::endl;
                     };
                 }
+
+
                 int countLeaves(Node * t)
                 {
                     if (!t)
@@ -59,6 +103,20 @@ class Tree
                     if (!t->left && !t->right)
                         return 1;
                     return countLeaves(t->left) + countLeaves(t->right);        
+                }
+
+
+                void Balance(Node *&node, int n, int k, info *a)
+                {
+                    if (n == k)
+                    {
+                        node = nullptr;
+                        return;
+                    }
+                    int m = (n + k) / 2;
+                    node = new Node(a[m].data, a[m].key);
+                    Balance(node->left, n, m, a);
+                    Balance(node->right, m + 1, k, a);
                 }
         };
         Node *root;
@@ -77,7 +135,7 @@ class Tree
         void ViewInOrder() { root->ViewInOrder(root); }
         void ViewPreOrder() { root->ViewPreOrder(root); }
         void ViewPostOrder() { root->ViewPostOrder(root); }
-        void Balance(int n, int k, int *a);
+        void Balance(int n, int k, info *a);
         void DeleteByKey(int key);
         int countLeaves();
 };
@@ -92,32 +150,7 @@ Tree::~Tree()
 
 void Tree::Add(string str, int num)
 {
-    Node * node = new Node(str, num);
-    if (root == nullptr)
-    {
-        root = node;
-        return;
-    }
-    Node *prev, *t;
-    t = root;
-    while (t)
-    {
-        prev = t;
-        if (num == t->key)
-        {
-            std::cout << "There is an element with such key!\n";
-            return;
-        }
-        if (num < t->key)
-            t = t->left;
-        else
-            t = t->right;
-    }
-    t = node;
-    if (num < prev->key)
-        prev->left = t;
-    else
-        prev->right = t;
+    root->Add(root, str, num);
 }
 
 
@@ -221,12 +254,9 @@ int Tree::countLeaves()
 }
 
 
-void Tree::Balance(int n, int k, int *a)
+void Tree::Balance(int n, int k, info *a)
 {
-    if (n == k) 
-    {
-        
-    }
+    root->Balance(root, n, k, a);
 }
 
 

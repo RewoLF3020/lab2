@@ -4,11 +4,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-struct info 
-{
-    int key;
-    string data;
-};
+void QuickSort(info arr[], int size);
 
 
 int main()
@@ -24,14 +20,25 @@ int main()
     {
         cout << "Enter key: ";
         cin >> arr[i].key;
+        for (int j = 0; j < i; j++)
+            if (arr[i].key == arr[j].key)
+            {
+                cout << "There is an element with such key!\n" 
+                    << "Enter another key: ";
+                cin >> arr[i].key;
+            }   
         cout << "Enter data: ";
         cin >> arr[i].data;
     }
 
-    for (int i = 0; i < size; i++)
+    QuickSort(arr, size);
+
+    t.Balance(0, size, arr);
+
+    /* for (int i = 0; i < size; i++)
     {
         t.Add(arr[i].data, arr[i].key);
-    }
+    } */
 
     t.ViewInOrder();
     cout << endl;
@@ -49,44 +56,13 @@ int main()
     cout << "Enter key to delete node: ";
     cin >> key;
     t.DeleteByKey(key);
-    //cout << t.SearchByKey(key) << endl;
+    cout << t.SearchByKey(key) << endl;
 
     return 0;
 }
 
 
-
-
-
-/* t.Add("ede", 10);
-    t.Add("chek", 25);
-    t.Add("wer", 20);
-    t.Add("wf4eg", 6);
-    t.Add("thdw", 21);
-    t.Add("dgfgdt", 8);
-    t.Add("sef", 1);
-    t.Add("zxc", 30);
-    t.ViewInOrder();
-    std::cout << std::endl;
-    t.ViewPreOrder();
-    std::cout << std::endl;
-    t.ViewPostOrder();
-    Tree tr;
-    cout << t.countLeaves() << endl;
-    string s = t.Search(10);
-    cout << s << endl;
-    t.DeleteByKey(10);
-    s = t.Search(10);
-    cout << s << endl; */
-
-
-
-
-
-
-
-/* 
-    void QuickSort(info arr[], int size)
+void QuickSort(info arr[], int size)
 {
     int stack[size];          // хранит границы массивов
 
@@ -136,4 +112,27 @@ int main()
             stack[++top] = j;
         }
     }
-} */
+}
+
+
+
+/* t.Add("ede", 10);
+    t.Add("chek", 25);
+    t.Add("wer", 20);
+    t.Add("wf4eg", 6);
+    t.Add("thdw", 21);
+    t.Add("dgfgdt", 8);
+    t.Add("sef", 1);
+    t.Add("zxc", 30);
+    t.ViewInOrder();
+    std::cout << std::endl;
+    t.ViewPreOrder();
+    std::cout << std::endl;
+    t.ViewPostOrder();
+    Tree tr;
+    cout << t.countLeaves() << endl;
+    string s = t.Search(10);
+    cout << s << endl;
+    t.DeleteByKey(10);
+    s = t.Search(10);
+    cout << s << endl; */
