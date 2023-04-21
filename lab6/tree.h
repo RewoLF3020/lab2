@@ -77,7 +77,7 @@ class Tree
         void ViewInOrder() { root->ViewInOrder(root); }
         void ViewPreOrder() { root->ViewPreOrder(root); }
         void ViewPostOrder() { root->ViewPostOrder(root); }
-        //void Balance();
+        void Balance(int n, int k, int *a);
         void DeleteByKey(int key);
         int countLeaves();
 };
@@ -218,6 +218,15 @@ int Tree::countLeaves()
 {
     Node * t = root;
     return t->countLeaves(t);
+}
+
+
+void Tree::Balance(int n, int k, int *a)
+{
+    if (n == k) 
+    {
+        
+    }
 }
 
 
