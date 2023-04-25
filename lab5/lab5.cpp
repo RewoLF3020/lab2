@@ -13,11 +13,11 @@ string CreateOpz(string &str);
 
 Stack t(40);
 
-int main()
+int main()          //ИСПРАВИТЬ: (строка с пробелами)-почти исправлено(умножение без знака если между операндами есть пробелы не сработает); и числа больше одного знакака
 {
     string inStr;
     std::cout << "Enter problem:\n";
-    std::cin >> inStr;
+    getline(std::cin, inStr);
     string result_s = CreateOpz(inStr);
     std::cout << result_s << std::endl;
     std::cout << Result(result_s);
@@ -54,6 +54,11 @@ string CreateOpz(string &str)
                 return "";
             }
             t.PriorityOperator(outStr, str[k]);
+        }
+        else if (str[k] == ' ')
+        {
+            k++;
+            continue;
         }
         else
         {
