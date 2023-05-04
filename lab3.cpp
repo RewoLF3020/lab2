@@ -24,7 +24,36 @@ class Stack
         int count() const { return items; }
         bool View() const;
         bool DeleteEven();
+        void swap2();
+        void swap();
 };
+
+
+void Stack::swap() //  поменять вершину с 4-ым местами
+{
+    Node * nb = begin->next->next->next;  //новый begin
+    Node * five = nb->next;
+
+    nb->next = begin->next;
+    nb->next->next->next = begin;
+    begin->next = five;
+
+    begin = nb;
+}
+
+
+void Stack::swap2() //второй с 4
+{
+    Node * n_sec = begin->next->next->next;
+    Node * five = n_sec->next;
+    Node * n_four = begin->next;
+
+    n_sec->next = begin->next->next;
+    n_sec->next->next = n_four;
+    n_four->next = five;
+
+    begin->next = n_sec;
+}
 
 
 Stack::Stack(int n) : size(n)
@@ -143,12 +172,13 @@ int main()
         st.push(po);
     }
 
+    st.swap2();
 
     st.View();
 
-    st.DeleteEven();
+    /* st.DeleteEven();
     cout << "After deleting even" << std::endl;
-    st.View();
+    st.View(); */
 }
 
 
