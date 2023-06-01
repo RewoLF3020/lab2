@@ -126,3 +126,22 @@ bool Queue::DeleteEven()
 
     return true;
 }
+
+
+void Queue::swap()
+{
+    Node * n_rear = front;
+    Node * n_front = rear;
+
+    n_rear->next = nullptr;
+    n_rear->prev = rear->prev;
+
+    n_front->next = front->next;
+    n_front->prev = nullptr;
+
+    rear->prev->next = n_rear;
+    front->next->prev = n_front;
+
+    front = n_front;
+    rear = n_rear;
+}

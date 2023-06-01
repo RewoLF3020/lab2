@@ -90,7 +90,7 @@ bool Stack::push(const T & item)
 
 bool Stack::pop(T & item)
 {
-    if (isempty())     
+    if (isempty())
         return false;
     item = begin->item;
     items--;
@@ -98,8 +98,8 @@ bool Stack::pop(T & item)
     begin = begin->next;
     delete temp;
     if (items == 0)
-        begin = nullptr;    
-    return true;    
+        begin = nullptr;
+    return true;
 }
 
 

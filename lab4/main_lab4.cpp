@@ -32,6 +32,7 @@ class Queue
         bool ViewFromFront() const;
         bool ViewFromRear() const;
         bool DeleteEven();
+        void swap();
 };
 
 
@@ -189,6 +190,26 @@ bool Queue::DeleteEven()
 }
 
 
+void Queue::swap()
+{
+    Node * n_rear = front;
+    Node * n_front = rear;
+
+    n_rear->prev = rear->prev;
+
+    n_front->next = front->next;
+
+    rear->prev->next = n_rear;
+    front->next->prev = n_front;
+
+    n_rear->next = nullptr;
+    n_front->prev = nullptr;
+
+    front = n_front;
+    rear = n_rear;
+}
+
+
 int main()
 {
     using std::cin;
@@ -209,10 +230,14 @@ int main()
 
     cout << "View from the beginning:\n";
     nq.ViewFromFront();
+    nq.swap();
     cout << "\nView from the end:\n";
+    //nq.ViewFromFront();
     nq.ViewFromRear();
+    //nq.ViewFromRear();
 
-    nq.DeleteEven();
-    cout << "\nView after deleting even:\n";
-    nq.ViewFromFront();
+    //nq.DeleteEven();
+    //cout << "\nView after deleting even:\n";
+    //nq.ViewFromFront();
+    //nq.ViewFromFront();
 }

@@ -27,6 +27,7 @@ class Queue
         bool ViewFromFront() const;
         bool ViewFromRear() const;
         bool DeleteEven();
+        void swap();
 };
 
 #endif
